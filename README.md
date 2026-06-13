@@ -17,25 +17,41 @@ python3 -m http.server 8000
 
 - Your character **runs automatically** to the right.
 - **Tap / Click / Space** (or ↑ / W) to **jump** — hold longer to jump higher.
-- You get a **double jump** — tap again in mid-air.
-- **Stomp** enemies from above to defeat them (and bounce!).
-- **Collect coins** for score.
-- **Don't fall** into the gaps.
+- Tap again in mid-air for a **double jump**.
+- Press **M** to mute/unmute.
 
-The world scrolls faster the further you go. Your best distance is saved locally.
+### Things in the world
+
+| | |
+|---|---|
+| 🍄 **Mushroom** | grow bigger — you can now survive one hit |
+| ⭐ **Star** | temporary invincibility; smash anything you touch |
+| ❓ **Question block** | bump it from below for a coin or power-up |
+| 🟫 **Brick** | a big player smashes it from below |
+| 🌀 **Spring** | launches you sky-high |
+| 🪙 **Coins / 💎 Gems** | gems are worth 5× and 50 points |
+| 👾 **Goomba / 🦅 Flyer** | stomp from above to defeat (chain stomps for a **combo** multiplier) |
+| 🦔 **Spiky** | can't be stomped — jump over it |
+| 🟢 **Pipes & gaps** | jump or die |
+
+The world scrolls faster the further you go, and the sky runs a continuous **day → sunset → night → dawn** cycle. Your best distance is saved locally.
 
 ## Features
 
-- Auto-running endless platformer with procedurally generated terrain
-- Variable-height jumps + double jump
-- Coins, floating platforms, stompable enemies, and pits
-- Parallax hills & clouds, particle effects, run animation
-- Distance + coin HUD, persistent best score (`localStorage`)
-- Responsive: scales to any screen, works with touch, mouse, and keyboard
+- Auto-running endless platformer with procedurally generated, difficulty-scaling terrain
+- Variable-height jump + double jump, spring launches
+- Power-ups (mushroom growth, star invincibility), question/brick blocks
+- Multiple enemy types (walker, flyer, non-stompable spiky) with stomp **combos**
+- Coins, gems, score system, persistent best distance (`localStorage`)
+- **Living backdrop:** continuous day/night color cycle, sun & moon, twinkling stars, night vignette
+- **Multi-layer parallax:** snow-capped mountains, rolling hills, trees & bushes
+- Detailed animated player sprite, particle effects, screen shake
+- Procedural **sound effects** via the Web Audio API (mutable with `M`)
+- Responsive: scales to any screen; works with touch, mouse, and keyboard
 
 ## Tech
 
-Single `index.html` (~500 lines). Game loop on `requestAnimationFrame` with a clamped fixed timestep, axis-aligned bounding-box collision, and a chunked terrain generator that streams scenery ahead of the camera and culls what's behind.
+Single `index.html` (~700 lines). Game loop on `requestAnimationFrame` with a clamped fixed timestep; AABB collision with separate top-landing and head-bump resolution for blocks; a chunked terrain streamer that generates scenery ahead of the camera and culls behind it; palette interpolation for the day/night cycle; and a tiny oscillator-based sound synth.
 
 ## License
 
